@@ -66,10 +66,12 @@ All information about Google App Engine projects, e.g. building and running appl
 >     ROOT = 'https://one-dot-api-dot-avian-silo-347.appspot.com/_ah/api';
 
 * to
+
 >     ROOT = 'https://one-dot-api-dot-yourappid.appspot.com/_ah/api';
 
 * replacing **yourappid** with the application ID you chose when setting up the application in the Google App Engine console
 * In all of the `yaml` files, replace the the value of the `application` parameter with your application ID, so change
+
 >     application: avian-silo-347
 
 * to
