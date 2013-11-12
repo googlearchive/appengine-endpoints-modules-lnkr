@@ -81,7 +81,8 @@ All information about Google App Engine projects, e.g. building and running appl
 * where **yourappid** is the application ID you chose
 * Deploy to Google App Engine using the following commands:
 
->     APPENGINE_SDK_DIR/appcfg.py update static_module.yaml api_module.yaml redirect_module.yaml data_module.yaml
+>     APPENGINE_SDK_DIR/appcfg.py update static_module.yaml api_module.yaml \
+>       redirect_module.yaml data_module.yaml
 >     APPENGINE_SDK_DIR/appcfg.py update_dispatch .
 
 
