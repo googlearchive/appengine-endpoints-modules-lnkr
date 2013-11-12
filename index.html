@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- One could omit unnecessary tags, but that would confuse us:
+         http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission
+         -->
+    <title>Linkr Short Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <script>
+      function init() {
+        console.log('client library start');
+        var ROOT = '';
+        if (window.location.host.indexOf('localhost') == 0) {
+          ROOT = 'http://' + window.location.host + '/_ah/api';
+        } else {
+          ROOT = 'https://one-dot-api-dot-avian-silo-347.appspot.com/_ah/api';
+        }
+
+        gapi.client.load('shortlink', 'v1', function() {
+          console.log('Loaded shortlink library');
+          document.querySelector('#shorten-form button').disabled = false;
+          document.querySelector('#shorten-form button').innerHTML = 'Make that link!';
+        }, ROOT);
+      }
+    </script>
+    <script src="//apis.google.com/js/client.js?onload=init"></script>
+    <script src="/js/lnkr-compiled.js"></script>
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
+  </head>
+  <body>
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/static/about.html">About</a></li>
+        <li><a href="/static/stats.html">Stats</a></li>
+        <li><a href="/static/api.html">API</a></li>
+      </ul>
+    </nav>
+    <div id="outer-container">
+      <div id="shorten-form">
+        <div id="status-message"></div>
+        <form>
+          <input class="required" type="text" id="target-link" name="target-link" placeholder="Shorten this URL" />
+          <input type="text" id="short-link" name="short-link" placeholder="To this custom short URL (optional)" />
+          <button type="button" id="submit-button" onclick="lnkr.submitForm();" disabled="true">Please wait ...</button>
+        </form>
+      </div>
+      <div id="user-links"></div>
+    </div>
+  </body>
+</html>

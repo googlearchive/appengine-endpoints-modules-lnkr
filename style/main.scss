@@ -1,0 +1,331 @@
+/* Colour Definitions */
+$charcoal: #222222;
+$dark-blue: #4884B2;
+$mid-blue: #43ADFF;
+$red-error: #B23723;
+$red-input-background: #FFB4BC;
+$input-required: #FFF597;
+$mid-grey: #F0F0F0;
+$white: #FFFFFF;
+
+/* mixins for repetitive styles */
+@mixin transition() {
+  -webkit-transition: opacity 1s ease-in-out;
+     -moz-transition: opacity 1s ease-in-out;
+      -ms-transition: opacity 1s ease-in-out;
+       -o-transition: opacity 1s ease-in-out;
+          transition: opacity 1s ease-in-out;
+}
+
+@mixin box-shadow() {
+  -moz-box-shadow:    2px 2px 2px 2px $mid-grey;
+  -webkit-box-shadow: 2px 2px 2px 2px $mid-grey;
+  box-shadow:         2px 2px 2px 2px $mid-grey;
+}
+
+@mixin input-element() {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  border: 1px solid $charcoal;
+}
+
+@mixin gradient-background() {
+  background: -webkit-linear-gradient(top, $white, $mid-grey);
+  background: -moz-linear-gradient(top, $white, $mid-grey);
+  background: -o-linear-gradient(top, $white, $mid-grey);
+  background: linear-gradient(top, $white, $mid-grey);
+}
+
+/* Styles */
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 11px;
+  background-color: $white;
+  margin-top: 0;
+}
+
+nav {
+  width: 100%;
+}
+nav ul {
+  list-style-type: none;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0;
+  width: 345px;
+  text-align: center;
+}
+nav li {
+  display: inline;
+  float: left;
+}
+nav a {
+  @include gradient-background();
+  text-decoration: none;
+  border-left: 1px solid $charcoal;
+  border-bottom: 1px solid $charcoal;
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+}
+
+nav a:hover, a:visited, a:active {
+  background: $mid-grey;
+}
+
+nav li:last-child a {
+  border-right: 1px solid $charcoal;
+}
+
+a, a:visited {
+  font-weight: bold;
+  color: $dark-blue;
+}
+
+#outer-container {
+  width: 100%;
+}
+
+#shorten-form {
+  @include gradient-background();
+  @include box-shadow();
+  color: $charcoal;
+  font-weight: bold;
+  padding: 10px;
+  margin: auto;
+  border: 1px solid $charcoal;
+  width: 500px;
+}
+
+#shorten-form input {
+  @include input-element();
+  width: 400px;
+}
+
+#shorten-form button {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#shorten-form button:disabled {
+  background: $mid-grey;
+}
+
+#status {
+  display: none;
+  font-size: 1.2em;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+#user-links {
+  margin-top: 20px;
+}
+
+#viz-linkspace {
+  height: 4em;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+#viz-creation-rate {
+  height: 4em;
+  line-height: 4em;
+  text-align: center;
+}
+
+.error-message {
+  color: $red_error;
+  font-size: 1.3em;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.info-message {
+  color: $charcoal;
+  font-size: 1.3em;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.error {
+  border: 1px solid $red-error;
+  background-color: $red-input-background;
+}
+
+.valid {
+  background-color: $white;
+}
+
+.required {
+  background-color: $input_required;
+}
+
+
+/* For rendering the input element placeholders  */
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-style: italic;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  font-style: italic;
+}
+
+:-ms-input-placeholder {
+  font-style: italic;
+}
+
+clearfix:before,  
+  .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+      clear: both;
+}
+.clearfix {
+      *zoom: 1;
+}
+
+/* Grid styles */
+.grid {
+  width: 520px;
+  margin: auto;
+  border: 1px solid $charcoal;
+}
+
+.grid:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid-caption {
+  width: 100%;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold; 
+  background: $dark-blue;
+  color: white;
+}
+
+.grid-cell {
+  width: 25%;
+  height: 2em;
+  line-height: 2em;
+  float: left;
+  text-align: center;
+  overflow: hidden;
+}
+
+.grid-header-cell {
+  width: 25%;
+  height: 2em;
+  line-height: 2em;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  color: $white;
+  background: $mid-blue;
+}
+
+.grid-row {
+  @include transition();
+  height: 2em;
+  background: $mid-grey;
+  opacity: 0;
+}
+
+.grid-row:nth-child(even) {
+  background: $white;
+}
+
+.normal-text {
+  @include box-shadow();
+  width: 700px;
+  margin: auto;
+  border: 1px solid $charcoal;
+  padding: 10px;
+  margin-bottom: 2em;
+}
+
+.normal-text-caption {
+  width: 700px;
+  margin: auto;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  background: $dark-blue;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid $charcoal;
+}
+
+.graph {
+  width: 500px;
+  height: 312px;
+  margin: auto;
+  border: 1px solid $charcoal;
+  padding: 10px;
+  margin-bottom: 2em;
+}
+
+.graph-caption {
+  width: 500px;
+  margin: auto;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  background: $dark-blue;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid $charcoal;
+}
+
+@media all and (max-width: 420px) {
+  .grid-caption {
+    width: 360px;
+  }
+  .grid {
+    width: 360px;
+  }
+  .graph-caption {
+    width: 360px;
+  }
+  .graph {
+    width: 360px;
+  }
+  .graph-caption {
+    width: 360px;
+  }
+  .normal-text {
+    width: 360px;
+  }
+  .normal-text-caption {
+    width: 360px;
+  }
+  #shorten-form {
+    width: 360px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #shorten-form input {
+    width: 300px;
+  }
+  #viz-linkspace {
+    height: 8em;
+  }
+}

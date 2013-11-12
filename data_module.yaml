@@ -1,0 +1,11 @@
+application: avian-silo-347
+version: one
+module: data
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /data/.*
+  script: data.app
+
