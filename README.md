@@ -39,14 +39,18 @@ All information about Google App Engine projects, e.g. building and running appl
   * Get the source code from the Github repository into a directory of your choice, using this command:
 
 >        git clone https://github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr.git
+
 * If you're not using Git, download the source as a zip file from [github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr/archive/master.zip](https://github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr/archive/master.zip).
 
 ## Deploying
 ####Running locally
 * Generate the Google Cloud Endpoint Client Library using the instructions at [developers.google.com/appengine/docs/python/endpoints/gen_clients](https://developers.google.com/appengine/docs/python/endpoints/gen_clients) (all on one line, the \ are used to break a single command across multiple lines):
+
 >     APPENGINE_SDK_DIR/endpointscfg.py \
 >       get_client_lib java -o . -f rest api.ShortLinkApi
+
 * Run the development server using this command (all on one line, the \ are used to break a single command across multiple lines):
+
 >     APPENGINE_SDK_DIR/dev_appserver.py dispatch.yaml \
 >       data_module.yaml static_module.yaml api_module.yaml \
 >       redirect_module.yaml
@@ -58,16 +62,22 @@ All information about Google App Engine projects, e.g. building and running appl
   * Create your own Google App Engine application in the Google App Engine console, and note the application ID that you chose
 * Generate the Google Cloud Endpoints Client Library as described above
 * Modify the index.html file around line 17, change
+
 >     ROOT = 'https://one-dot-api-dot-avian-silo-347.appspot.com/_ah/api';
+
 * to
 >     ROOT = 'https://one-dot-api-dot-yourappid.appspot.com/_ah/api';
+
 * replacing **yourappid** with the application ID you chose when setting up the application in the Google App Engine console
 * In all of the `yaml` files, replace the the value of the `application` parameter with your application ID, so change
 >     application: avian-silo-347
+
 * to
 >     application: yourappid
+
 * where **yourappid** is the application ID you chose
 * Deploy to Google App Engine using the following commands:
+
 >     APPENGINE_SDK_DIR/appcfg.py update static_module.yaml api_module.yaml redirect_module.yaml data_module.yaml
 >     APPENGINE_SDK_DIR/appcfg.py update_dispatch .
 
@@ -77,8 +87,10 @@ All information about Google App Engine projects, e.g. building and running appl
 This project makes use of SASS which is a great way of making CSS easier to use. Instructions for installing SASS are available from (see [sass-lang.com](http://sass-lang.com)).
 * The main SASS file is `style/main.scss`
 * If you want to make changes to the style, modify `style/main.scss` and use the following command to get the CSS to use (from your project working directory):
+
 >     cd style
 >     sass main.scss > main.css
+
 * Please note that this command will overwrite the `main.css` file that is used by the project
 
 #### Google Closure Library minification
@@ -91,6 +103,7 @@ If you'd like to explore this, you can make changes to either `js/site.js` or `j
   * Assume that CLOSURE_LIB_DIR is the directory in which you installed the Google Closure Library
   * Assume that CLOSURE_COMP_DIR is the directory in which you installed the Google Closure Library
   * Assume that WORKING_DIR is the directory in which you downloaded the source code for this application
+
 >     CLOSURE_LIB_DIR/closure/bin/build/closurebuilder.py \
 >        --root=CLOSURE_LIB_DIR \
 >        --root=WOKRING_DIR/js/ \
