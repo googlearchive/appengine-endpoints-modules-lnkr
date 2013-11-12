@@ -37,7 +37,7 @@ All information about Google App Engine projects, e.g. building and running appl
 #### Download the source code
 * If you're using Git
   * Get the source code from the Github repository into a directory of your choice, using this command:
-  >        git clone https://github.com/GoogleCloudPlatform/XYZ
+>        git clone https://github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr.git
 * If you're not using Git, download the source as a zip file from [github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr/archive/master.zip](https://github.com/GoogleCloudPlatform/appengine-endpoints-modules-lnkr/archive/master.zip).
 
 ## Deploying
