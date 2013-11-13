@@ -1,0 +1,13 @@
+application: avian-silo-347
+version: one
+module: api
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /_ah/spi/.*
+  script: api.application
+
+builtins:
+- deferred: on

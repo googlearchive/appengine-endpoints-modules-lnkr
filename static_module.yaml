@@ -1,0 +1,37 @@
+application: avian-silo-347
+version: one
+module: static
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /js
+  static_dir: js
+
+- url: /style
+  static_dir: style
+
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /index.html
+  static_files: index.html
+  upload: index.html
+
+- url: /static/about.html
+  static_files: static/about.html
+  upload: static/about.html
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+- url: /static/stats.html
+  static_files: static/stats.html
+  upload: static/stats.html
+
+- url: /static/api.html
+  static_files: static/api.html
+  upload: static/api.html

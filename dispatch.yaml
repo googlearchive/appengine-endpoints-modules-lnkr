@@ -1,0 +1,30 @@
+application: avian-silo-347
+
+dispatch:
+- url: "*/_ah/spi/*"
+  module: api
+
+- url: "*/_ah/queue/deferred"
+  module: api
+
+- url: "*/data*"
+  module: data
+
+- url: "*/"
+  module: static
+
+- url: "*/js/*"
+  module: static
+
+- url: "*/style/*"
+  module: static
+
+- url: "*/static/*"
+  module: static
+
+- url: "*/index.html"
+  module: static
+
+- url: "*/favicon.ico"
+  module: static
+

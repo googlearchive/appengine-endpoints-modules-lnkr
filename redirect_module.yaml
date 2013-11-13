@@ -1,0 +1,13 @@
+application: avian-silo-347
+module: default
+version: one
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: forwarder.app
+
+builtins:
+- deferred: on

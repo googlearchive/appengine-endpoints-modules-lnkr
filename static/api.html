@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- One could omit unnecessary tags, but that would confuse us:
+         http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission
+         -->
+    <title>Linkr Short Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/main.css" />
+  </head>
+  <body>
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/static//about.html">About</a></li>
+        <li><a href="/static/stats.html">Stats</a></li>
+        <li><a href="/static/api.html">API</a></li>
+      </ul>
+    </nav>
+    <div id="outer-container">
+      <div class="normal-text-caption">APIs for Short Links</div>
+      <div class="normal-text">
+        <p>
+          <ul>
+            <li>Short Link API
+              <ul>
+                <li><a href="#restful">RESTful HTTP API</a></li> 
+                <li><a href="#javascript">Javascript API</a></li> 
+                <li><a href="#mobile">Android and iOS API</a></li> 
+              </ul>
+            </li>
+            <li>Data API
+              <ul>
+                <li><a href="#creation">Creation data</a></li> 
+                <li><a href="#use">Usage data</a></li> 
+                <li><a href="#data">Storage use data</a></li> 
+              </ul>
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div class="normal-text-caption">Short Link API</div>
+      <div class="normal-text">
+        <p>
+          The Short Link API allows you to create Short Links from your applications. You can use the API in the form of a RESTful API over HTTP or using an Android or iOS app with the libraries.
+        </p>
+        <p>
+          <a name="restful">RESTful HTTP API</a>
+        </p>
+        <p>
+          <ul>
+            <li>URL: <a href="/_ah/api/shortlink/v1/create">/_ah/api/shortlink/v1/create</a></li>
+            <li>HTTP Method: POST</li>
+            <li>Input: (as a JSON message)
+              <ul>
+                <li>target_link: the URL to which the Short Link redirects</li>
+                <li>short_link (optional): if specified, the user requests a custom Short Link. If not present, a random Short Link will be assigned</li>
+              </ul>
+            </li>
+            <li>Example input:</li>
+            <pre>
+{
+  "state": "----X----",
+  "target_link": "http://foo.com"
+}
+            </pre>
+            <li>Output: a JSON object containing the following fields
+              <ul>
+                <li>created_date (optional): a Unix timestamp indicating the time (in UTC) that the Short Link was created. Present if creation was a success</li>
+                <li>short_link (optional): the Short Link code, to be prefixed with the domain (e.g. lnkr.co.za). Present if creation was a success</li>
+                <li>status: the status of the creation operation; non-zero indicates failure</li>
+                <li>target_link (optional): the URL to which the Short Link redirects. Present if creation was a success</li>
+                <li>msg (optional, repeatable): Any error messages that might be appropriate. Present if creation failed</li>
+              </ul>
+            </li>
+            <li>Example output:</li>
+            <pre>
+{
+  "created_date": "1383588183093", 
+  "short_link": "XScfof", 
+  "status": "0", 
+  "target_link": "http://lnkr.co.za"
+}
+            </pre>
+          </ul>
+        </p>
+        <p>
+          <a name="javascript">Javascript API</a>
+        </p>
+        <p>
+          To use the Javascript API you'll first need to include the Google API client. The value of the <code>onload</code> parameter is a callback function you'll need to create.
+        </p>
+        <pre>
+&lt;script src="https://apis.google.com/js/client.js?onload=init"&gt;&lt;/script&gt;
+        </pre>
+        <p>
+          The callback function will load the Short Link API.
+        </p>
+        <pre>
+var ROOT = 'https://1-dot-api.lnkr.co.za';
+gapi.client.load('shortlink', 'v1', function() {
+  // The API is loaded, you can now use it 
+}, ROOT);
+        </pre>
+        <p>
+          To create a Short Link, use the <code>create</code> method.
+        </p>
+        <pre>
+gapi.client.shortlink.create(req).execute(function(resp) {
+  // req is the input
+  // resp is the output
+});
+        </pre>
+        <p>
+          <ul>
+           <li>Input: (as a JSON message)
+             <ul>
+               <li>target_link: the URL to which the Short Link redirects</li>
+               <li>short_link (optional): if specified, the user requests a custom Short Link. If not present, a random Short Link will be assigned</li>
+             </ul>
+           </li>
+           <li>Example input:</li>
+           <pre>
+{
+  target_link: "http://lnkr.co.za",
+  short_link: "customLink"
+}
+           </pre>
+            <li>Output: a JSON object containing the following fields
+              <ul>
+                <li>created_date (optional): a Unix timestamp indicating the time (in UTC) that the Short Link was created. Present if creation was a success</li>
+                <li>short_link (optional): the Short Link code, to be prefixed with the domain (e.g. lnkr.co.za). Present if creation was a success</li>
+                <li>status: the status of the creation operation; non-zero indicates failure</li>
+                <li>target_link (optional): the URL to which the Short Link redirects. Present if creation was a success</li>
+                <li>msg (optional, repeatable): Any error messages that might be appropriate. Present if creation failed</li>
+              </ul>
+            </li>
+            <li>Example output:</li>
+            <pre>
+{
+  "created_date": "1383588183093", 
+  "short_link": "XScfof", 
+  "status": "0", 
+  "target_link": "http://lnkr.co.za"
+}
+            </pre>
+        </ul>
+       </p>
+        <p>
+          <a name="mobile">Android and iOS API</a>
+        </p>
+        <p>
+          <ul>
+            <li>For Android clients, consult <a href="https://developers.google.com/appengine/docs/python/endpoints/consume_android">this guide</a></li>
+            <li>For iOS clients, consult <a href="https://developers.google.com/appengine/docs/python/endpoints/consume_ios">this guide</a></li>
+          </ul>
+        </p>
+      </div>
+      <div class="normal-text-caption">Data API</div>
+      <div class="normal-text">
+        <p>
+          You can get the data behind the <a href="/static/stats.html">stats</a> page as JSON.
+        </p>
+        <p>
+          <a name="creation">Short Link creation statistics</a>
+        </p>
+        <p>
+          <ul>
+            <li>URL: <a href="/data/creation">/data/creation</a></li>
+            <li>Description: Shows the number of Short Links created per country
+            per day</li>
+            <li>Output:
+              <ul>
+                <li>An array with key "data", elements [country, count, day] with header row at position 0</li>
+                <li>Country is the 2-letter ISO code, ZZ means unknown</li>
+                <li>Day is the Unix timestamp (in UTC) for 00:00 on a given day</li>
+              </ul>
+            </li>
+            <li>Example output</li>
+            <pre>
+{"data": [
+    ["country", "count", "day"],
+    ["ZA", 6, 1383004800000000],
+    ["ZA", 29, 1383264000000000],
+    ["ZA", 10, 1383523200000]
+  ]
+}
+            </pre>
+          </ul>
+        </p>
+        <p>
+          <a name="use">Short Link use statistics</a>
+        </p>
+        <p>
+          <ul>
+            <li>URL: <a href="/data/use">/data/use</a></li>
+            <li>Description: Shows the number of Short Links used per country per day</li>
+            <li>Output:
+              <ul>
+                <li>An array with key "data", elements [country, count(cached),
+                count(notcached)] with header row at position 0</li>
+                <li>The cached vs. not-cached count refers to the use of
+                memcache when using a short link. The short link will be cached
+                on first use</li>
+                <li>Country is the 2-letter ISO code, ZZ means unknown</li>
+                <li>Day is the Unix timestamp (in UTC) for 00:00 on a given day</li>
+              </ul>
+            </li>
+            <li>Example output</li>
+            <pre>
+{"data": [
+    ["country", "count-notcached", "count-cached"],
+    ["ZA", 2, 2]
+  ]
+}
+            </pre>
+          </ul>
+        </p>
+        <p>
+          <a name="data">Short Link data statistics</a>
+        </p>
+        <p>
+          <ul>
+            <li>URL: <a href="/data/linkspace">/data/linkspace</a></li>
+            <li>Description: Shows stats about the usage (storage and
+            combinations) of the available Short Links</li>
+            <li>Output:
+              <ul>
+                <li>An array with key "data", elements [used, total, data_bytes] with header row at position 0</li>
+                <li>"used" is the number of Short Links currently created</li>
+                <li>"total" is the number of Short Links available in total</li>
+                <li>"data_bytes" is the total storage used for Short Links
+                objects</li>
+              </ul>
+            </li>
+            <li>Example output</li>
+            <pre>
+{"data": [
+    ["used", "total", "data_bytes"],
+    [7, 62523502209, 1903]
+  ]
+}
+            </pre>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

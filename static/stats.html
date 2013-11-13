@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- One could omit unnecessary tags, but that would confuse us:
+         http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-tag-omission
+         -->
+    <title>Linkr Short Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="/style/main.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans" />
+    <script src="/js/lnkr-compiled.js"></script>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['geochart']});
+      google.setOnLoadCallback(lnkr.data.drawCharts);
+    </script>
+  </head>
+  <body>
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/static/about.html">About</a></li>
+        <li><a href="/static/stats.html">Stats</a></li>
+        <li><a href="/static/api.html">API</a></li>
+      </ul>
+    </nav>
+    <div id="outer-container">
+      <div class="graph-caption">Short links creation rate</div>
+      <div class="graph" id="viz-creation-rate"></div>
+      <div class="graph-caption">Short links are being created in these countries</div>
+      <div class="graph" id="viz-creation"></div>
+      <div class="graph-caption">Short links are being used in these countries</div>
+      <div class="graph" id="viz-use"></div>
+      <div class="graph-caption">Short Link namespace saturation</div>
+      <div class="graph" id="viz-linkspace"></div>
+    </div>
+  </body>
+</html>
